@@ -42,16 +42,16 @@ impl BST<i32> {
         // } else {
         //     String::from("ur shit is fucked")
         // }
-        *Self::in_order(self.root, String::new())
+        (*Self::in_order(&self.root, String::new())).to_string()
     }
 
-    fn in_order(root: Link<i32>, mut s: String) -> String {
+    fn in_order(root: &Link<i32>, mut s: String) -> String {
         if root.is_none() {
             s
         } else {
-            s = format!("{} {} ", s, Self::in_order(root.unwrap().left, &s));
+            s = format!("{} {} ", s, Self::in_order(&root.unwrap().left, s));
             // s = &format!("{} {} ", s, root.unwrap().val);
-            s = format!("{} {} ", s, Self::in_order(root.unwrap().right, &s));
+            s = format!("{} {} ", s, Self::in_order(&root.unwrap().right, s));
             s
         }
     }
