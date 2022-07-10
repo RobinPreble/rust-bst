@@ -42,20 +42,21 @@ impl BST<i32> {
         println!("left: {}", &self.root.as_ref().unwrap().left.as_ref().unwrap().val);
         println!("root: {}", &self.root.as_ref().unwrap().val);
         println!("right: {}", &self.root.as_ref().unwrap().right.as_ref().unwrap().val);
-        (*Self::in_order(&self.root, String::new())).to_string()
+        Self::in_order(&self.root)
     }
 
     /* private function that takes a node r and a string s containing the nodes visited so 
     far. Performs an in order traversal on the tree rooted at r and returns a string 
     containing the nodes in the order they are visited */
-    fn in_order(r: &Link<i32>, mut s: String) -> String {
+    fn in_order(r: &Link<i32>) -> String {
         if r.is_none() {
             //println!("is none: {}", s);
             String::new()
         } else {
-            s += Self::in_order(&r.as_ref().unwrap().left, s.clone()).as_str();
+            let mut s = String::new();
+            s += &Self::in_order(&r.as_ref().unwrap().left);
             s += r.as_ref().unwrap().val.to_string().as_str();
-            s += Self::in_order(&r.as_ref().unwrap().right, s.clone()).as_str();
+            s += &Self::in_order(&r.as_ref().unwrap().right);
             // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().left, s.clone()));
             // s = format!("{}{}", s, r.as_ref().unwrap().val);
             // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().right, s.clone()));
