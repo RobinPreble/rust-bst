@@ -8,6 +8,8 @@ fn main() {
     tree.add(1);
     tree.add(5);
 
+    println!("Tree: {}", tree.to_string());
+
 }
 
 

@@ -36,22 +36,18 @@ impl BST<i32> {
     
 
     pub fn to_string(&self) -> String {
-        // let this_node = self.root.as_ref();
-        // if this_node.is_some() {
-        //     this_node.unwrap().val.to_string()
-        // } else {
-        //     String::from("ur shit is fucked")
-        // }
         (*Self::in_order(&self.root, String::new())).to_string()
     }
 
     fn in_order(root: &Link<i32>, mut s: String) -> String {
         if root.is_none() {
-            s
+            println!("is none: {}", s);
+            String::new()
         } else {
             s = format!("{} {} ", s, Self::in_order(&root.as_ref().unwrap().left, s.clone()));
             s = format!("{} {} ", s, root.as_ref().unwrap().val);
             s = format!("{} {} ", s, Self::in_order(&root.as_ref().unwrap().right, s.clone()));
+            println!("this shit: {}", s);
             s
         }
     }
