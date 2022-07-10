@@ -15,22 +15,22 @@ impl BST<i32> {
         BST { root: None }
     }
 
-    pub fn add(self, val: i32) { 
+    pub fn add(&mut self, val: i32) { 
         let new_node = Box::new(Node {
             val: val, 
             left: None,
             right: None,
         });
-        Self::place_node(self.root, new_node);
+        Self::place_node(&mut self.root, new_node);
     }
     
-    fn place_node(mut root: Link<i32>, new_node: Box<Node<i32>>) {
+    fn place_node(root: &mut Link<i32>, new_node: Box<Node<i32>>) {
         if root.is_none() {
-            root = Some(new_node);
+            *root = Some(new_node);
         } else if root.as_ref().unwrap().val > new_node.val {
-            Self::place_node(root.unwrap().left, new_node);
+            Self::place_node(&mut root.as_mut().unwrap().left, new_node);
         } else if root.as_ref().unwrap().val < new_node.val {
-            Self::place_node(root.unwrap().left, new_node);
+            Self::place_node(&mut root.as_mut().unwrap().left, new_node);
         }
     }
     
@@ -49,9 +49,9 @@ impl BST<i32> {
         if root.is_none() {
             s
         } else {
-            s = format!("{} {} ", s, Self::in_order(&root.unwrap().left, s));
-            // s = &format!("{} {} ", s, root.unwrap().val);
-            s = format!("{} {} ", s, Self::in_order(&root.unwrap().right, s));
+            s = format!("{} {} ", s, Self::in_order(&root.as_ref().unwrap().left, s.clone()));
+            s = format!("{} {} ", s, root.as_ref().unwrap().val);
+            s = format!("{} {} ", s, Self::in_order(&root.as_ref().unwrap().right, s.clone()));
             s
         }
     }
@@ -64,7 +64,7 @@ mod test {
     fn basic () {
         let tree:BST<i32> = BST::new(); 
 
-        tree.add(4);
+        //tree.add(4);
         //assert_eq!(tree.as_str(), String::from("4"));
 
     }
