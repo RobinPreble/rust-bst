@@ -50,14 +50,17 @@ impl BST<i32> {
     containing the nodes in the order they are visited */
     fn in_order(r: &Link<i32>, mut s: String) -> String {
         if r.is_none() {
-            println!("is none: {}", s);
+            //println!("is none: {}", s);
             String::new()
         } else {
-            s = format!("{} {} ", s, Self::in_order(&r.as_ref().unwrap().left, s.clone()));
-            s = format!("{} {} ", s, r.as_ref().unwrap().val);
-            s = format!("{} {} ", s, Self::in_order(&r.as_ref().unwrap().right, s.clone()));
-            println!("this shit: {}", s);
-            s
+            s += Self::in_order(&r.as_ref().unwrap().left, s.clone()).as_str();
+            s += r.as_ref().unwrap().val.to_string().as_str();
+            s += Self::in_order(&r.as_ref().unwrap().right, s.clone()).as_str();
+            // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().left, s.clone()));
+            // s = format!("{}{}", s, r.as_ref().unwrap().val);
+            // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().right, s.clone()));
+            //println!("this shit: {}", s);
+            format!("{} ", s)
         }
     }
 }
