@@ -13,7 +13,7 @@ fn main() {
     tree.add(4);
     tree.add(8);
 
-    println!("Tree: {}", tree.to_string());
+    tree.print();
 
 }
 

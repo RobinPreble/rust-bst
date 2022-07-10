@@ -37,6 +37,11 @@ impl BST<i32> {
         }
     }
     
+    /* prints a string containing the nodes in self as given by an in order traversal */
+    pub fn print(&self) {
+        println!("{}", Self::in_order(&self.root));
+    }
+
     /* returns a string containing the nodes in self as given by an in order traversal */
     pub fn to_string(&self) -> String {
         Self::in_order(&self.root)
@@ -62,11 +67,37 @@ impl BST<i32> {
 mod test {
     use super::BST;
     #[test]
-    fn basic () {
-        // let tree:BST<i32> = BST::new(); 
-        // tree.add(4);
-        // assert_eq!(tree.as_str(), String::from("4"));
+    fn tests () {
+        let mut tree:BST<i32> = BST::new(); 
 
+        // check that empty tree behaves correctly
+        assert_eq!(tree.to_string(), String::from(""));
+
+        // check that tree containing only the root behaves correctly
+        tree.add(4);
+        assert_eq!(tree.to_string(), String::from("4 "));
+
+        // add left child
+        tree.add(1);
+        assert_eq!(tree.to_string(), String::from("1 4 ")); 
+
+        // add right child
+        tree.add(6);
+        assert_eq!(tree.to_string(), String::from("1 4 6 "));
+
+        // try adding value already in the tree 
+        tree.add(1); 
+        assert_eq!(tree.to_string(), String::from("1 4 6 "));
+
+        // add more children 
+        tree.add(2); 
+        tree.add(10);
+        tree.add(8); 
+        tree.add(3); 
+        tree.add(5); 
+        tree.add(7); 
+        tree.add(9); 
+        assert_eq!(tree.to_string(), String::from("1 2 3 4 5 6 7 8 9 10 "))
     }
 
 }
