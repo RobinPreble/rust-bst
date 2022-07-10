@@ -7,6 +7,11 @@ fn main() {
     tree.add(4);
     tree.add(1);
     tree.add(5);
+    tree.add(12);
+    tree.add(-12);
+    tree.add(3);
+    tree.add(4);
+    tree.add(8);
 
     println!("Tree: {}", tree.to_string());
 

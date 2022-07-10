@@ -39,9 +39,6 @@ impl BST<i32> {
     
     /* returns a string containing the nodes in self as given by an in order traversal */
     pub fn to_string(&self) -> String {
-        println!("left: {}", &self.root.as_ref().unwrap().left.as_ref().unwrap().val);
-        println!("root: {}", &self.root.as_ref().unwrap().val);
-        println!("right: {}", &self.root.as_ref().unwrap().right.as_ref().unwrap().val);
         Self::in_order(&self.root)
     }
 
@@ -49,19 +46,14 @@ impl BST<i32> {
     far. Performs an in order traversal on the tree rooted at r and returns a string 
     containing the nodes in the order they are visited */
     fn in_order(r: &Link<i32>) -> String {
+        let mut s = String::new();
         if r.is_none() {
-            //println!("is none: {}", s);
-            String::new()
+            s
         } else {
-            let mut s = String::new();
             s += &Self::in_order(&r.as_ref().unwrap().left);
-            s += r.as_ref().unwrap().val.to_string().as_str() + " ";
+            s += r.as_ref().unwrap().val.to_string().as_str(); s.push(' ');
             s += &Self::in_order(&r.as_ref().unwrap().right);
-            // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().left, s.clone()));
-            // s = format!("{}{}", s, r.as_ref().unwrap().val);
-            // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().right, s.clone()));
-            //println!("this shit: {}", s);
-            format!("{} ", s)
+            s
         }
     }
 }
@@ -71,10 +63,9 @@ mod test {
     use super::BST;
     #[test]
     fn basic () {
-        let tree:BST<i32> = BST::new(); 
-
-        //tree.add(4);
-        //assert_eq!(tree.as_str(), String::from("4"));
+        // let tree:BST<i32> = BST::new(); 
+        // tree.add(4);
+        // assert_eq!(tree.as_str(), String::from("4"));
 
     }
 
