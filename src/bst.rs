@@ -55,7 +55,7 @@ impl BST<i32> {
         } else {
             let mut s = String::new();
             s += &Self::in_order(&r.as_ref().unwrap().left);
-            s += r.as_ref().unwrap().val.to_string().as_str();
+            s += r.as_ref().unwrap().val.to_string().as_str() + " ";
             s += &Self::in_order(&r.as_ref().unwrap().right);
             // s = format!("{}{}", s, Self::in_order(&r.as_ref().unwrap().left, s.clone()));
             // s = format!("{}{}", s, r.as_ref().unwrap().val);
